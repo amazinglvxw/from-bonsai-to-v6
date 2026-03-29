@@ -1,0 +1,95 @@
+@import "tailwindcss";
+
+/* ===== Stitch Design Tokens (Material 3 from DESIGN.md) ===== */
+@theme {
+  /* Surfaces */
+  --color-surface: #131313;
+  --color-surface-dim: #131313;
+  --color-surface-bright: #3a3939;
+  --color-surface-container-lowest: #0e0e0e;
+  --color-surface-container-low: #1c1b1b;
+  --color-surface-container: #201f1f;
+  --color-surface-container-high: #2a2a2a;
+  --color-surface-container-highest: #353534;
+  --color-surface-variant: #353534;
+
+  /* Primary */
+  --color-primary: #c2c6d6;
+  --color-primary-container: #0a0f1a;
+  --color-on-primary: #2b303c;
+  --color-on-primary-container: #777b8a;
+
+  /* Secondary */
+  --color-secondary: #d4beec;
+  --color-secondary-container: #503f66;
+
+  /* Tertiary (accent blue) */
+  --color-tertiary: #a2c9ff;
+  --color-tertiary-container: #001024;
+  --color-on-tertiary: #00315c;
+  --color-on-tertiary-container: #237ed4;
+
+  /* Text */
+  --color-on-surface: #e5e2e1;
+  --color-on-surface-variant: #c6c6cc;
+  --color-on-background: #e5e2e1;
+
+  /* Outline */
+  --color-outline: #909096;
+  --color-outline-variant: #45464c;
+
+  /* Error */
+  --color-error: #ffb4ab;
+
+  /* Chapter accents */
+  --color-accent-red: #ef4444;
+  --color-accent-blue: #a2c9ff;
+  --color-accent-yellow: #facc15;
+  --color-accent-green: #10b981;
+  --color-accent-purple: #d4beec;
+
+  /* Typography */
+  --font-headline: 'Inter', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-label: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+/* ===== Base ===== */
+body {
+  background-color: var(--color-surface);
+  color: var(--color-on-surface);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: rgba(162, 201, 255, 0.25);
+  color: var(--color-tertiary-container);
+}
+
+/* Grid pattern from Stitch */
+.grid-pattern {
+  background-image: radial-gradient(circle, #353534 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.grid-overlay {
+  background-image: radial-gradient(circle, #45464c 1px, transparent 1px);
+  background-size: 24px 24px;
+  opacity: 0.05;
+}
+
+/* Editorial shadow */
+.editorial-shadow {
+  box-shadow: 0 20px 40px rgba(10, 15, 26, 0.4);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #353534; border-radius: 10px; }
+
+/* No-scrollbar utility */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }

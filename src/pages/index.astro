@@ -1,0 +1,141 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const base = import.meta.env.BASE_URL;
+---
+<BaseLayout>
+  <!-- Hero Section -->
+  <section class="relative px-8 pt-20 pb-32 overflow-hidden grid-pattern">
+    <div class="absolute inset-0 bg-gradient-to-br from-[#0a0f1a] via-[#131313] to-[#1a0a2e] -z-10"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-tertiary/5 blur-[120px] rounded-full -z-10"></div>
+    <div class="max-w-screen-xl mx-auto flex flex-col items-center text-center">
+      <div class="font-mono text-tertiary text-xs tracking-[0.3em] uppercase mb-6 flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+        Now Reading: The Hyper-Threaded Chronos
+      </div>
+      <h1 class="text-6xl md:text-8xl font-black font-headline tracking-tighter text-on-surface mb-8 max-w-4xl leading-[0.9]">
+        From Bonsai to V6
+      </h1>
+      <p class="text-on-surface-variant text-lg md:text-xl max-w-2xl font-body leading-relaxed mb-12">
+        How we built, broke, and rebuilt an AI agent's memory &mdash; a chronicle of honest engineering.
+      </p>
+      <!-- Stats Card -->
+      <div class="bg-surface-variant/60 backdrop-blur-xl p-8 md:p-12 rounded-xl editorial-shadow border border-outline-variant/15 flex flex-wrap justify-center gap-12 md:gap-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent pointer-events-none"></div>
+        <div class="flex flex-col items-start">
+          <span class="font-mono text-[10px] uppercase tracking-widest text-on-surface-variant mb-2">Primary Corpus</span>
+          <div class="text-3xl font-mono font-bold text-on-surface">93 <span class="text-sm font-normal text-on-surface-variant">Research Papers</span></div>
+        </div>
+        <div class="flex flex-col items-start border-l border-outline-variant/20 pl-12 hidden md:flex">
+          <span class="font-mono text-[10px] uppercase tracking-widest text-on-surface-variant mb-2">Optimization Scope</span>
+          <div class="text-3xl font-mono font-bold text-on-surface">10 <span class="text-sm font-normal text-on-surface-variant">Metrics</span></div>
+        </div>
+        <div class="flex flex-col items-start border-l border-outline-variant/20 pl-12">
+          <span class="font-mono text-[10px] uppercase tracking-widest text-on-surface-variant mb-2">Memory Coherence</span>
+          <div class="text-3xl font-mono font-bold text-on-surface">15/100 &rarr; <span class="text-tertiary italic">98.2</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Milestones Section -->
+  <section id="milestones" class="px-8 pb-32">
+    <div class="max-w-screen-2xl mx-auto">
+      <div class="flex items-baseline justify-between mb-12 border-b border-outline-variant/15 pb-4">
+        <h2 class="font-headline text-3xl font-extrabold tracking-tight">Milestones</h2>
+        <div class="font-mono text-xs text-on-surface-variant uppercase tracking-widest flex items-center gap-4">
+          <span>Project Status: Stable</span>
+          <span class="text-outline">/</span>
+          <span>Revision 2026.03</span>
+        </div>
+      </div>
+      <div class="flex overflow-x-auto gap-6 pb-8 snap-x no-scrollbar">
+        <!-- Card 1: Cyber Bonsai -->
+        <div class="flex-none w-[320px] snap-start bg-surface-container-low p-8 rounded-xl border-l-2 border-red-500 hover:bg-surface-container transition-colors group">
+          <div class="flex justify-between items-start mb-12">
+            <span class="material-symbols-outlined text-red-400 group-hover:scale-110 transition-transform" style="font-variation-settings: 'FILL' 1;">skull</span>
+            <span class="font-mono text-[10px] text-on-surface-variant">M.01</span>
+          </div>
+          <h3 class="font-headline font-bold text-xl mb-3 text-on-surface">The Cyber Bonsai Audit</h3>
+          <p class="text-sm text-on-surface-variant leading-relaxed mb-6 font-body">The initial failure that redefined our approach to agent memory systems.</p>
+          <div class="font-mono text-[10px] uppercase text-red-400/80 bg-red-400/5 px-2 py-1 rounded inline-block">Critical Failure</div>
+        </div>
+        <!-- Card 2: 93 Papers -->
+        <div class="flex-none w-[320px] snap-start bg-surface-container-low p-8 rounded-xl border-l-2 border-tertiary hover:bg-surface-container transition-colors group">
+          <div class="flex justify-between items-start mb-12">
+            <span class="material-symbols-outlined text-tertiary group-hover:scale-110 transition-transform" style="font-variation-settings: 'FILL' 1;">menu_book</span>
+            <span class="font-mono text-[10px] text-on-surface-variant">M.02</span>
+          </div>
+          <h3 class="font-headline font-bold text-xl mb-3 text-on-surface">93 Papers Deep</h3>
+          <p class="text-sm text-on-surface-variant leading-relaxed mb-6 font-body">A recursive dive into the state of the art. Extracting signal from academic noise.</p>
+          <div class="font-mono text-[10px] uppercase text-tertiary/80 bg-tertiary/5 px-2 py-1 rounded inline-block">Synthesis Phase</div>
+        </div>
+        <!-- Card 3: The Pivot -->
+        <div class="flex-none w-[320px] snap-start bg-surface-container-low p-8 rounded-xl border-l-2 border-yellow-500 hover:bg-surface-container transition-colors group">
+          <div class="flex justify-between items-start mb-12">
+            <span class="material-symbols-outlined text-yellow-400 group-hover:scale-110 transition-transform" style="font-variation-settings: 'FILL' 1;">bolt</span>
+            <span class="font-mono text-[10px] text-on-surface-variant">M.03</span>
+          </div>
+          <h3 class="font-headline font-bold text-xl mb-3 text-on-surface">The Pivot</h3>
+          <p class="text-sm text-on-surface-variant leading-relaxed mb-6 font-body">From elaborate architecture to simple systems that actually work.</p>
+          <div class="font-mono text-[10px] uppercase text-yellow-400/80 bg-yellow-400/5 px-2 py-1 rounded inline-block">Core Shift</div>
+        </div>
+        <!-- Card 4: V6.0 Design -->
+        <div class="flex-none w-[320px] snap-start bg-surface-container-low p-8 rounded-xl border-l-2 border-emerald-500 hover:bg-surface-container transition-colors group">
+          <div class="flex justify-between items-start mb-12">
+            <span class="material-symbols-outlined text-emerald-400 group-hover:scale-110 transition-transform" style="font-variation-settings: 'FILL' 1;">settings</span>
+            <span class="font-mono text-[10px] text-on-surface-variant">M.04</span>
+          </div>
+          <h3 class="font-headline font-bold text-xl mb-3 text-on-surface">V6.0 Design</h3>
+          <p class="text-sm text-on-surface-variant leading-relaxed mb-6 font-body">Clean, immutable, with 10 quantified metrics and real feedback loops.</p>
+          <div class="font-mono text-[10px] uppercase text-emerald-400/80 bg-emerald-400/5 px-2 py-1 rounded inline-block">Infrastructure</div>
+        </div>
+        <!-- Card 5: Quantified Results -->
+        <div class="flex-none w-[320px] snap-start bg-surface-container-low p-8 rounded-xl border-l-2 border-secondary hover:bg-surface-container transition-colors group">
+          <div class="flex justify-between items-start mb-12">
+            <span class="material-symbols-outlined text-secondary group-hover:scale-110 transition-transform" style="font-variation-settings: 'FILL' 1;">equalizer</span>
+            <span class="font-mono text-[10px] text-on-surface-variant">M.05</span>
+          </div>
+          <h3 class="font-headline font-bold text-xl mb-3 text-on-surface">Quantified Results</h3>
+          <p class="text-sm text-on-surface-variant leading-relaxed mb-6 font-body">The benchmarks that proved our hypothesis. Before and after.</p>
+          <div class="font-mono text-[10px] uppercase text-secondary/80 bg-secondary/5 px-2 py-1 rounded inline-block">Final Audit</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Articles -->
+  <section id="articles" class="px-8 pb-32">
+    <div class="max-w-screen-2xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8">
+      <!-- Featured large card -->
+      <div class="md:col-span-7 relative group cursor-pointer">
+        <div class="aspect-[16/9] bg-surface-container-high rounded-xl overflow-hidden relative">
+          <div class="w-full h-full bg-gradient-to-br from-primary-container via-surface to-tertiary-container"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent"></div>
+        </div>
+        <div class="absolute bottom-12 left-12 right-12">
+          <div class="font-mono text-[10px] uppercase tracking-widest text-tertiary mb-4">Deep Dive / 24 Min Read</div>
+          <h3 class="font-headline text-4xl font-black tracking-tight leading-none text-white mb-4">The Architectural Debt of Modern LLMs</h3>
+          <p class="text-on-surface-variant text-base max-w-lg mb-6 leading-relaxed">Why V6 rejects over-engineered memory rules in favor of simple, honest feedback loops.</p>
+        </div>
+      </div>
+      <!-- Side articles -->
+      <div class="md:col-span-5 flex flex-col gap-10">
+        <div class="border-b border-outline-variant/15 pb-8 group cursor-pointer">
+          <span class="font-mono text-[10px] uppercase text-on-surface-variant mb-2 block">Case Study</span>
+          <h4 class="font-headline text-2xl font-bold mb-3 group-hover:text-tertiary transition-colors">Bonsai: The Fragile Beginnings</h4>
+          <p class="text-sm text-on-surface-variant leading-relaxed">Understanding why we started with 800 lines of rules before discovering they never actually ran.</p>
+        </div>
+        <div class="border-b border-outline-variant/15 pb-8 group cursor-pointer">
+          <span class="font-mono text-[10px] uppercase text-on-surface-variant mb-2 block">Technical Analysis</span>
+          <h4 class="font-headline text-2xl font-bold mb-3 group-hover:text-tertiary transition-colors">The Cost of Persistence</h4>
+          <p class="text-sm text-on-surface-variant leading-relaxed">How 93 papers across 28 days shaped the V6.0 architecture. Contrastive distillation, not accumulation.</p>
+        </div>
+        <div class="pb-8 group cursor-pointer">
+          <span class="font-mono text-[10px] uppercase text-on-surface-variant mb-2 block">Theory</span>
+          <h4 class="font-headline text-2xl font-bold mb-3 group-hover:text-tertiary transition-colors">Harness Is Everything</h4>
+          <p class="text-sm text-on-surface-variant leading-relaxed">Why the model matters less than the system around it. Six independent validations.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

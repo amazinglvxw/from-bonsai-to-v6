@@ -1,0 +1,61 @@
+---
+title: "93 Papers Deep"
+subtitle: "28 days, 93 papers, and the slow realization that the answer was never in the literature — it was in the feedback loop we refused to build."
+chapter: 2
+accent: "tertiary"
+readingTime: "18 min"
+date: "2026-03"
+lang: "en"
+---
+
+After the Cyber Bonsai audit, we did what any self-respecting engineer would do when confronted with failure: we read papers. A lot of papers.
+
+## The Research Sprint
+
+From March 20 to March 28, we analyzed 93 academic papers, open-source projects, and developer blogs. Each was evaluated through dual-AI analysis — Claude for depth, Gemini for contrarian perspective.
+
+<div class="my-12 bg-surface-container-low rounded-xl p-6 flex items-center justify-between group hover:bg-surface-container transition-colors border border-outline-variant/10">
+  <div class="flex flex-col">
+    <span class="font-mono text-[10px] uppercase tracking-widest text-on-primary-container mb-2">Research Corpus</span>
+    <span class="text-lg font-headline font-bold text-on-surface">Papers Analyzed</span>
+  </div>
+  <div class="flex items-baseline space-x-3">
+    <span class="font-mono text-4xl font-bold text-tertiary">93</span>
+    <span class="font-mono text-sm text-on-surface-variant/40">in 28 days</span>
+  </div>
+</div>
+
+## The Five Themes That Emerged
+
+Across 93 papers, five themes kept surfacing:
+
+### 1. Harness > Model (6 independent validations)
+
+From Sydney's SWE-agent to Anthropic's own guidelines, from MetaClaw to Training-Free GRPO: the system around the model matters more than the model itself. Our 800-line rule file was the anti-harness — it tried to make the model smarter instead of making the system more reliable.
+
+### 2. Simple Systems That Run > Complex Systems That Don't
+
+yoyo-evolve grew from 200 to 31,000 lines with a simple JSONL log and cargo test. OpenSpace built a full self-evolving skill engine. Both had one thing in common: **real execution logs feeding real feedback loops**.
+
+### 3. Direct Sharing Hurts — Distill First
+
+MemCollab proved empirically that sharing raw memory between agents *degrades* performance. You must distill through contrastive analysis first. Our A2A protocol was naive.
+
+### 4. Cheap Verifiers Beat LLM Self-Evaluation
+
+ACG Survey's Guideline 7.4, NLAH's deterministic adapters, yoyo-evolve's cargo test — every source agreed: use code to verify, not LLMs.
+
+### 5. Context Durability Is the Next Bottleneck
+
+Philipp Schmid at Hugging Face named it. Our 800-line rule file was the anti-pattern — causing the very "context fatigue" it was designed to prevent.
+
+<div class="my-12 p-8 bg-surface-container-lowest rounded-xl border-l-4 border-tertiary relative overflow-hidden">
+  <p class="text-2xl font-headline font-semibold text-on-background tracking-tight italic leading-snug">
+    "The model matters less than the system around it. Six independent validations."
+  </p>
+  <cite class="block mt-4 font-mono text-xs uppercase tracking-widest text-on-primary-container">— Cross-paper synthesis, INS-001 through INS-093</cite>
+</div>
+
+## What Changed
+
+These 93 papers didn't give us a new architecture. They gave us **permission to simplify**. The answer was never in the next paper — it was in the execution log we never wrote to.

@@ -1,0 +1,57 @@
+---
+title: "V6.0 设计"
+subtitle: "10 个指标、50 个黄金任务，以及'先度量再修改'的原则。在改动一行代码之前，先建好评估框架。"
+chapter: 4
+accent: "emerald-400"
+readingTime: "15 min"
+date: "2026-03"
+lang: "zh"
+---
+
+V6.0 在改变任何东西之前，先度量了一切。
+
+## 评估框架
+
+受学术严谨性启发——尤其是 MemCollab 的方法论——我们构建了一个 10 指标评估框架，分为三层。
+
+### 第一层：反馈回路健康度
+
+| 指标 | 基线 | 目标 |
+|--------|----------|--------|
+| M01 日志密度 | 0.5/会话 | ≥2.0 |
+| M02 Q 值方差 | 0 | >0.001 |
+| M03 信息密度 | 2.2% | ≥20% |
+
+### 第二层：记忆效能
+
+| 指标 | 基线 | 目标 |
+|--------|----------|--------|
+| M04 检索命中率 | 未知 | ≥60% |
+| M05 用户纠正率 | 未知 | 降低 30% |
+| M06 上下文效率 | 3.3% | 低于 15% |
+| M07 检索延迟 | 未知 | 低于 2000ms |
+
+### 第三层：技能进化
+
+| 指标 | 基线 | 目标 |
+|--------|----------|--------|
+| M08 技能复用率 | 6.7% | ≥20% |
+| M09 技能成功率 | 93.3% | ≥85% |
+| M10 活跃子系统比 | 33% | ≥50% |
+
+## 黄金数据集：对照组
+
+从真实会话历史中提取 50 个代表性任务。先跑 V5.9 基线，再跑 V6.0。用 McNemar 检验判断统计显著性。
+
+<div class="my-12 bg-surface-container-low rounded-xl p-6 flex items-center justify-between border border-outline-variant/10">
+  <div class="flex flex-col">
+    <span class="font-mono text-[10px] uppercase tracking-widest text-on-primary-container mb-2">黄金数据集基线</span>
+    <span class="text-lg font-headline font-bold text-on-surface">V5.9 得分</span>
+  </div>
+  <div class="flex items-baseline space-x-3">
+    <span class="font-mono text-4xl font-bold text-emerald-400">0.724</span>
+    <span class="font-mono text-sm text-on-surface-variant/40">/ 1.000</span>
+  </div>
+</div>
+
+关键短板：**info_completeness 仅得 2%**（50 个任务中只有 1 个通过）。执行日志存在但没有结构化指标。这成了 V6.0 的首要攻击目标。

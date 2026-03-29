@@ -1,0 +1,57 @@
+---
+title: "V6.0 Design"
+subtitle: "10 metrics, 50 golden tasks, and the principle that measurement precedes modification. Building the evaluation framework before changing a single line of code."
+chapter: 4
+accent: "emerald-400"
+readingTime: "15 min"
+date: "2026-03"
+lang: "en"
+---
+
+Before V6.0 changed anything, it measured everything.
+
+## The Evaluation Framework
+
+Inspired by academic rigor — particularly MemCollab's methodology — we built a 10-metric evaluation framework organized in three tiers.
+
+### Tier 1: Feedback Loop Health
+
+| Metric | Baseline | Target |
+|--------|----------|--------|
+| M01 Log Density | 0.5/session | ≥2.0 |
+| M02 Q-Value Variance | 0 | >0.001 |
+| M03 Info Density | 2.2% | ≥20% |
+
+### Tier 2: Memory Efficacy
+
+| Metric | Baseline | Target |
+|--------|----------|--------|
+| M04 Retrieval Hit Rate | Unknown | ≥60% |
+| M05 User Correction Rate | Unknown | ↓30% |
+| M06 Context Efficiency | 3.3% | under 15% |
+| M07 Retrieval Latency | Unknown | under 2000ms |
+
+### Tier 3: Skill Evolution
+
+| Metric | Baseline | Target |
+|--------|----------|--------|
+| M08 Skill Reuse Rate | 6.7% | ≥20% |
+| M09 Skill Success Rate | 93.3% | ≥85% |
+| M10 Active Subsystem Ratio | 33% | ≥50% |
+
+## Golden Dataset: The Control Group
+
+50 representative tasks extracted from real session history. Run against V5.9 baseline, then V6.0. McNemar's test for statistical significance.
+
+<div class="my-12 bg-surface-container-low rounded-xl p-6 flex items-center justify-between border border-outline-variant/10">
+  <div class="flex flex-col">
+    <span class="font-mono text-[10px] uppercase tracking-widest text-on-primary-container mb-2">Golden Dataset Baseline</span>
+    <span class="text-lg font-headline font-bold text-on-surface">V5.9 Score</span>
+  </div>
+  <div class="flex items-baseline space-x-3">
+    <span class="font-mono text-4xl font-bold text-emerald-400">0.724</span>
+    <span class="font-mono text-sm text-on-surface-variant/40">/ 1.000</span>
+  </div>
+</div>
+
+The critical weakness: **info_completeness scored 2%** (1/50 tasks). The execution log existed but contained no structured metrics. This became V6.0's primary target.

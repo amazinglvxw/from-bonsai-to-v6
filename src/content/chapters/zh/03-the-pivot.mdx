@@ -1,0 +1,43 @@
+---
+title: "转向"
+subtitle: "从 800 行规则到 60 行宪章。从赛博盆景到闭合的反馈回路。最难的不是构建——是删除。"
+chapter: 3
+accent: "yellow-400"
+readingTime: "12 min"
+date: "2026-03"
+lang: "zh"
+---
+
+这次转向并不戏剧化。没有某个顿悟时刻。只是证据缓慢堆积，直到结论再无法否认。
+
+## 核心洞察
+
+清华的 NLAH 论文给了我们词汇：**Runtime Charter vs Harness Skill**。我们那 800 行的 memory-management.md 把两者混在了一个巨大的文件里。宪章（系统如何运转）和技能（如何解决具体问题）纠缠在一起。
+
+修复方法是一次概念手术：把不可变的宪法和可变的能力分离开。
+
+## 我们删了什么
+
+最难的工程决策不是造什么，而是删什么。
+
+我们把记忆管理规则从 800 行裁剪到目标 60 行核心宪章。其余的变成了技能、模式，或者直接删掉。
+
+<div class="my-12 bg-surface-container-low rounded-xl p-6 flex items-center justify-between border border-outline-variant/10">
+  <div class="flex flex-col">
+    <span class="font-mono text-[10px] uppercase tracking-widest text-on-primary-container mb-2">上下文精简</span>
+    <span class="text-lg font-headline font-bold text-on-surface">核心规则</span>
+  </div>
+  <div class="flex items-baseline space-x-3">
+    <span class="font-mono text-2xl text-on-surface-variant/40">800 行</span>
+    <span class="material-symbols-outlined text-yellow-400 text-sm">trending_flat</span>
+    <span class="font-mono text-4xl font-bold text-yellow-400">60</span>
+  </div>
+</div>
+
+## 三条原则
+
+转向期间的每个决定都经过三个问题的过滤：
+
+1. **它有真实的反馈机制吗？** 如果一条规则无法被代码验证，它不属于宪章。
+2. **它足够简单能真正执行吗？** 复杂是执行的天敌。
+3. **删掉它会让系统变差吗？** 如果你无法衡量影响，就无法证明成本合理。

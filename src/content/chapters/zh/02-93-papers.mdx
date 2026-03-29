@@ -1,0 +1,61 @@
+---
+title: "93 篇论文深处"
+subtitle: "28 天，93 篇论文，以及一个缓慢到来的领悟：答案从来不在文献里——它在我们一直拒绝构建的反馈回路中。"
+chapter: 2
+accent: "tertiary"
+readingTime: "18 min"
+date: "2026-03"
+lang: "zh"
+---
+
+赛博盆景审计之后，我们做了任何有自尊的工程师面对失败时都会做的事：读论文。读了很多论文。
+
+## 密集研读
+
+从 3 月 20 日到 3 月 28 日，我们分析了 93 篇学术论文、开源项目和开发者博客。每一篇都经过双 AI 分析——Claude 负责深度，Gemini 负责对立视角。
+
+<div class="my-12 bg-surface-container-low rounded-xl p-6 flex items-center justify-between group hover:bg-surface-container transition-colors border border-outline-variant/10">
+  <div class="flex flex-col">
+    <span class="font-mono text-[10px] uppercase tracking-widest text-on-primary-container mb-2">研究语料库</span>
+    <span class="text-lg font-headline font-bold text-on-surface">分析论文数</span>
+  </div>
+  <div class="flex items-baseline space-x-3">
+    <span class="font-mono text-4xl font-bold text-tertiary">93</span>
+    <span class="font-mono text-sm text-on-surface-variant/40">28 天内</span>
+  </div>
+</div>
+
+## 浮现的五大主题
+
+93 篇论文中，五个主题反复出现：
+
+### 1. Harness 比模型更重要（6 项独立验证）
+
+从 Sydney 的 SWE-agent 到 Anthropic 自己的指南，从 MetaClaw 到 Training-Free GRPO：模型周围的系统比模型本身更重要。我们那 800 行规则文件恰好是反 Harness 的——它试图让模型变聪明，而不是让系统变可靠。
+
+### 2. 能跑的简单系统 > 不能跑的复杂系统
+
+yoyo-evolve 靠一个简单的 JSONL 日志和 cargo test 从 200 行长到了 31,000 行。OpenSpace 构建了完整的自进化技能引擎。两者的共同点：**真实的执行日志喂入真实的反馈回路**。
+
+### 3. 直接共享有害——先蒸馏
+
+MemCollab 用实验证明了：在 Agent 之间直接共享原始记忆会*降低*性能。必须先通过对比分析进行蒸馏。我们的 A2A 协议太天真了。
+
+### 4. 廉价验证器胜过 LLM 自我评估
+
+ACG Survey 的 Guideline 7.4、NLAH 的确定性适配器、yoyo-evolve 的 cargo test——所有来源都指向同一个结论：用代码验证，别用 LLM。
+
+### 5. Context Durability 是下一个瓶颈
+
+Hugging Face 的 Philipp Schmid 给了它名字。我们那 800 行规则文件就是反面教材——恰恰制造了它本想防止的"上下文疲劳"。
+
+<div class="my-12 p-8 bg-surface-container-lowest rounded-xl border-l-4 border-tertiary relative overflow-hidden">
+  <p class="text-2xl font-headline font-semibold text-on-background tracking-tight italic leading-snug">
+    "模型没有它周围的系统重要。六项独立验证。"
+  </p>
+  <cite class="block mt-4 font-mono text-xs uppercase tracking-widest text-on-primary-container">—— 跨论文综合分析，INS-001 至 INS-093</cite>
+</div>
+
+## 发生了什么改变
+
+这 93 篇论文并没有给我们一个新架构。它们给了我们**简化的许可**。答案从来不在下一篇论文里——它在我们从未写入过的执行日志中。

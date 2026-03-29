@@ -1,0 +1,193 @@
+---
+import '../styles/global.css';
+import { getCollection } from "astro:content";
+
+interface Props {
+  title: string;
+  subtitle?: string;
+  chapter: number;
+  accent?: string;
+  readingTime?: string;
+  date?: string;
+  lang?: string;
+}
+
+const { title, subtitle = "", chapter, accent = "tertiary", readingTime = "12 min", date = "2026-03", lang = "en" } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const chapterLabel = `Chapter ${String(chapter).padStart(2, "0")}`;
+
+// Data-driven chapter list from content collection
+const allChapters = await getCollection("chapters", ({ data }) => data.lang === lang);
+const chapters = allChapters
+  .sort((a, b) => a.data.chapter - b.data.chapter)
+  .map(ch => ({
+    num: ch.data.chapter,
+    title: ch.data.title,
+    slug: ch.id.replace(".mdx", ""),
+  }));
+
+// Accent color mapping (fixes Tailwind JIT dynamic class issue)
+const accentMap: Record<string, { text: string; border: string; bg: string }> = {
+  "red-400":     { text: "text-red-400",     border: "border-red-400",     bg: "bg-red-400/10" },
+  "tertiary":    { text: "text-tertiary",    border: "border-tertiary",    bg: "bg-tertiary/10" },
+  "yellow-400":  { text: "text-yellow-400",  border: "border-yellow-400",  bg: "bg-yellow-400/10" },
+  "emerald-400": { text: "text-emerald-400", border: "border-emerald-400", bg: "bg-emerald-400/10" },
+  "secondary":   { text: "text-secondary",   border: "border-secondary",   bg: "bg-secondary/10" },
+};
+const ac = accentMap[accent] ?? accentMap["tertiary"];
+---
+<!DOCTYPE html>
+<html class="dark" lang={lang}>
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>{title} | From Bonsai to V6</title>
+  <meta name="description" content={subtitle} />
+  <meta property="og:title" content={`${title} | From Bonsai to V6`} />
+  <meta property="og:description" content={subtitle} />
+  <meta property="og:type" content="article" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+</head>
+<body class="bg-surface text-on-surface font-body">
+  <!-- Nav -->
+  <nav class="fixed top-0 w-full z-50 bg-surface-variant/60 backdrop-blur-xl editorial-shadow">
+    <div class="flex justify-between items-center px-8 py-4 max-w-[1440px] mx-auto">
+      <a href={base} class="text-2xl font-black tracking-tighter text-primary uppercase">Chronos</a>
+      <div class="hidden md:flex items-center space-x-8 font-light tracking-tight">
+        <a class="text-on-surface-variant/60 hover:text-primary transition-colors" href={base}>Home</a>
+        <span class="text-primary border-b-2 border-tertiary pb-1">Chronos</span>
+      </div>
+      <div class="flex items-center space-x-6">
+        <span class="material-symbols-outlined text-primary hover:text-tertiary transition-colors cursor-pointer">search</span>
+        <button class="px-5 py-2 bg-primary text-on-primary font-bold rounded-xl hover:shadow-[0_0_20px_rgba(194,198,214,0.15)] transition-all active:scale-95">Subscribe</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="flex max-w-[1440px] mx-auto min-h-screen pt-24">
+    <!-- Left Sidebar: TOC -->
+    <aside class="hidden lg:flex flex-col h-[calc(100vh-6rem)] sticky top-24 w-64 px-6 py-8" style="border-right: none; background: linear-gradient(to right, transparent, rgba(28,27,27,0.3));">
+      <div class="mb-10">
+        <h3 class="font-mono text-[10px] uppercase tracking-widest text-tertiary mb-1">Technical Editorial</h3>
+        <h2 class="font-headline font-bold text-lg leading-tight text-on-surface">From Bonsai to V6</h2>
+      </div>
+      <div class="mt-8 space-y-4">
+        <div class="text-[10px] font-mono uppercase text-on-primary-container tracking-widest">Chapters</div>
+        <ul class="space-y-4">
+          {chapters.map(ch => (
+            <li class={ch.num === chapter
+              ? "text-xs text-tertiary pl-4 border-l-2 border-tertiary bg-tertiary/5 py-1"
+              : "text-xs text-on-surface-variant/60 pl-4 border-l border-surface-container-high"}>
+              <a href={`${base}chapters/${ch.slug}/`}>
+                {`${String(ch.num).padStart(2,"0")}. ${ch.title}`}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 relative overflow-hidden">
+      <div class="absolute inset-0 z-[-1] bg-gradient-to-br from-primary-container via-surface to-[#1a1024]"></div>
+      <div class="absolute inset-0 z-[-1] grid-overlay"></div>
+      <div class="max-w-[1000px] mx-auto px-8 md:px-16 py-12 flex flex-col lg:flex-row gap-16">
+        <!-- Article Body -->
+        <article class="flex-1 max-w-[680px]">
+          <header class="mb-16">
+            <div class="flex items-center space-x-4 mb-6">
+              <span class:list={["font-mono text-[11px] px-3 py-1 bg-surface-container-high border-l-2", ac.text, ac.border]}>{chapterLabel.toUpperCase()}</span>
+              <span class="font-mono text-[11px] text-on-primary-container">{readingTime.toUpperCase()} READ</span>
+            </div>
+            <h1 class="font-headline text-5xl md:text-6xl font-extrabold tracking-tighter text-on-background leading-[1.1] mb-8">
+              {title}
+            </h1>
+            {subtitle && (
+              <p class="text-xl text-on-surface-variant font-light leading-relaxed">{subtitle}</p>
+            )}
+          </header>
+
+          <div class="max-w-none space-y-6 text-on-surface/90 leading-[1.8] text-lg [&_h2]:text-2xl [&_h2]:font-headline [&_h2]:font-bold [&_h2]:mt-16 [&_h2]:mb-6 [&_h2]:text-on-surface [&_h3]:text-xl [&_h3]:font-headline [&_h3]:font-semibold [&_h3]:mt-12 [&_h3]:mb-4 [&_strong]:text-on-surface [&_em]:text-on-surface-variant [&_code]:font-mono [&_code]:text-tertiary [&_code]:text-sm [&_a]:text-tertiary [&_a]:underline [&_table]:w-full [&_table]:text-sm [&_th]:text-left [&_th]:font-mono [&_th]:text-[10px] [&_th]:uppercase [&_th]:tracking-widest [&_th]:text-on-surface-variant [&_th]:pb-3 [&_th]:border-b [&_th]:border-outline-variant/20 [&_td]:py-2 [&_td]:border-b [&_td]:border-outline-variant/10 [&_td]:text-on-surface-variant [&_ul]:space-y-2 [&_ul]:list-disc [&_ul]:pl-6 [&_ol]:space-y-2 [&_ol]:list-decimal [&_ol]:pl-6 [&_li]:text-on-surface-variant">
+            <slot />
+          </div>
+
+          <!-- Article Footer -->
+          <footer class="mt-24 pt-12 border-t border-surface-container-low flex flex-wrap items-center justify-between gap-6">
+            <div class="flex items-center space-x-4">
+              <span class="font-mono text-[10px] uppercase text-on-primary-container">Share this entry</span>
+              <div class="flex space-x-2">
+                <button class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center hover:bg-tertiary hover:text-on-tertiary transition-colors">
+                  <span class="material-symbols-outlined text-lg">share</span>
+                </button>
+                <button class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center hover:bg-tertiary hover:text-on-tertiary transition-colors">
+                  <span class="material-symbols-outlined text-lg">link</span>
+                </button>
+              </div>
+            </div>
+            <div class="flex items-center space-x-2 text-on-surface-variant">
+              <span class="material-symbols-outlined text-sm">language</span>
+              <span class="font-mono text-[10px] uppercase tracking-tighter">Language: {lang.toUpperCase()}</span>
+            </div>
+          </footer>
+        </article>
+
+        <!-- Right Sidebar: Metrics -->
+        <aside class="hidden xl:block w-72">
+          <div class="sticky top-32 space-y-8">
+            <div class="bg-surface-container-low rounded-xl p-6 border border-outline-variant/5">
+              <h4 class="font-mono text-[10px] uppercase tracking-widest text-tertiary mb-6 flex items-center justify-between">
+                Live Metrics
+                <span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+              </h4>
+              <div class="space-y-6">
+                <div>
+                  <div class="flex justify-between items-end mb-2">
+                    <span class="text-xs text-on-surface-variant uppercase font-mono tracking-tighter">Log Density</span>
+                    <span class="text-sm font-mono font-bold text-on-surface">10.0/s</span>
+                  </div>
+                  <div class="h-10 flex items-end space-x-1">
+                    <div class="flex-1 bg-tertiary/20 h-3 rounded-t-sm"></div>
+                    <div class="flex-1 bg-tertiary/30 h-5 rounded-t-sm"></div>
+                    <div class="flex-1 bg-tertiary/40 h-7 rounded-t-sm"></div>
+                    <div class="flex-1 bg-tertiary/30 h-4 rounded-t-sm"></div>
+                    <div class="flex-1 bg-tertiary/60 h-8 rounded-t-sm"></div>
+                    <div class="flex-1 bg-tertiary h-10 rounded-t-sm"></div>
+                    <div class="flex-1 bg-tertiary/40 h-6 rounded-t-sm"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between items-end mb-2">
+                    <span class="text-xs text-on-surface-variant uppercase font-mono tracking-tighter">Info Density</span>
+                    <span class="text-sm font-mono font-bold text-on-surface">3.3%</span>
+                  </div>
+                  <div class="h-10 flex items-end space-x-1">
+                    <div class="flex-1 bg-red-400/60 h-2 rounded-t-sm"></div>
+                    <div class="flex-1 bg-red-400/40 h-2 rounded-t-sm"></div>
+                    <div class="flex-1 bg-red-400/30 h-3 rounded-t-sm"></div>
+                    <div class="flex-1 bg-red-400/20 h-2 rounded-t-sm"></div>
+                    <div class="flex-1 bg-red-400/20 h-1 rounded-t-sm"></div>
+                    <div class="flex-1 bg-red-400/30 h-2 rounded-t-sm"></div>
+                    <div class="flex-1 bg-red-400/20 h-1 rounded-t-sm"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-primary-container w-full py-12 border-t border-surface-container-low mt-auto">
+    <div class="flex flex-col md:flex-row justify-between items-center px-16 max-w-[1440px] mx-auto opacity-80 hover:opacity-100 transition-opacity">
+      <div class="font-mono text-[10px] uppercase tracking-tighter text-surface-variant">&copy; 2026 From Bonsai to V6</div>
+      <div class="flex space-x-8 mt-6 md:mt-0 font-mono text-[10px] uppercase tracking-tighter">
+        <a class="text-surface-variant hover:text-tertiary transition-colors" href="https://github.com/amazinglvxw/from-bonsai-to-v6">GitHub</a>
+        <span class="text-primary">Language: {lang.toUpperCase()}</span>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

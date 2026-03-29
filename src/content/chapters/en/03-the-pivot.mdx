@@ -1,0 +1,43 @@
+---
+title: "The Pivot"
+subtitle: "From 800 lines of rules to 60 lines of charter. From cyber bonsai to closed feedback loops. The hardest part wasn't building — it was deleting."
+chapter: 3
+accent: "yellow-400"
+readingTime: "12 min"
+date: "2026-03"
+lang: "en"
+---
+
+The pivot wasn't dramatic. There was no single moment of revelation. It was a slow accumulation of evidence until the conclusion became undeniable.
+
+## The Core Insight
+
+The NLAH paper from Tsinghua gave us the vocabulary: **Runtime Charter vs Harness Skill**. Our 800-line memory-management.md had mixed both into one massive file. The charter (how the system operates) was entangled with skills (how to solve specific problems).
+
+The fix was conceptual surgery: separate the immutable constitution from the mutable capabilities.
+
+## What We Deleted
+
+The hardest engineering decision isn't what to build. It's what to delete.
+
+We cut the memory-management rules from 800 lines to a target of 60 lines of core charter. Everything else became skills, patterns, or was simply removed.
+
+<div class="my-12 bg-surface-container-low rounded-xl p-6 flex items-center justify-between border border-outline-variant/10">
+  <div class="flex flex-col">
+    <span class="font-mono text-[10px] uppercase tracking-widest text-on-primary-container mb-2">Context Reduction</span>
+    <span class="text-lg font-headline font-bold text-on-surface">Core Rules</span>
+  </div>
+  <div class="flex items-baseline space-x-3">
+    <span class="font-mono text-2xl text-on-surface-variant/40">800 lines</span>
+    <span class="material-symbols-outlined text-yellow-400 text-sm">trending_flat</span>
+    <span class="font-mono text-4xl font-bold text-yellow-400">60</span>
+  </div>
+</div>
+
+## The Three Principles
+
+Every decision during the pivot was filtered through three questions:
+
+1. **Does this have a real feedback mechanism?** If a rule can't be verified by code, it doesn't belong in the charter.
+2. **Is this simple enough to actually run?** Complexity is the enemy of execution.
+3. **Would deleting this make the system worse?** If you can't measure the impact, you can't justify the cost.
